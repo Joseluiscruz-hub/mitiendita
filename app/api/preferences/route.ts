@@ -32,6 +32,9 @@ export async function POST(request: Request) {
           unit_price: 599,
         }],
         external_reference: orderId,
+        integration_data: {
+          integrator_id: process.env.MERCADOPAGO_INTEGRATOR_ID,
+        },
         back_urls: {
           success: `${appUrl}/resultado?status=approved`,
           pending: `${appUrl}/resultado?status=pending`,
@@ -40,7 +43,7 @@ export async function POST(request: Request) {
         auto_return: "approved",
         statement_descriptor: "JL AUTOMATION",
         metadata: { order_id: orderId, integration: "checkout-pro-certification" },
-      },
+      } as any,
       requestOptions: { idempotencyKey: randomUUID() },
     });
 

@@ -4,6 +4,10 @@ import { validateMercadoPagoSignature } from "@/lib/webhook-signature";
 
 export const runtime = "nodejs";
 
+export async function GET() {
+  return NextResponse.json({ received: true });
+}
+
 export async function POST(request: Request) {
   const secret = process.env.MERCADOPAGO_WEBHOOK_SECRET;
   const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN;

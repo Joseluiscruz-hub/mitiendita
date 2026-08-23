@@ -18,11 +18,11 @@ Abre `http://localhost:3000`. La creación de preferencias funciona localmente, 
 
 ## 3. Despliegue en Vercel
 
-1. Sube el proyecto a un repositorio privado de GitHub.
-2. Impórtalo en Vercel.
-3. Registra las cuatro variables de `.env.example` en Vercel.
-4. Cambia `NEXT_PUBLIC_APP_URL` por la URL final, sin diagonal al final.
-5. Vuelve a desplegar.
+1. Importa este repositorio en Vercel.
+2. Agrega en **Project Settings → Environment Variables** las claves de `.env.example`.
+3. Define `NEXT_PUBLIC_APP_URL` con la URL pública final de Vercel, sin diagonal al final.
+4. Revisa que `MERCADOPAGO_ACCESS_TOKEN`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` y `MERCADOPAGO_WEBHOOK_SECRET` estén cargadas en **Production** y **Preview** si también pruebas ahí.
+5. Despliega de nuevo para que el build tome esas variables.
 
 ## 4. Webhook
 

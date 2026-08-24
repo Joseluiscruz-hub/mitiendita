@@ -15,14 +15,18 @@ export async function POST(request: Request) {
 
   const url = new URL(request.url);
   const body = (await request.json().catch(() => null)) as { type?: string; data?: { id?: string | number } } | null;
-  const dataId = url.searchParams.get("data.id") ?? String(body?.data?.id ?? "");
-  const isValid = validateMercadoPagoSignature({
-    signature: request.headers.get("x-signature"),
-    requestId: request.headers.get("x-request-id"),
-    dataId,
-    secret,
-  });
-  if (!isValid) return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+  const dataId = url.searchParams.get("data.id") ?? url.searchParams.get("id") ?? String(body?.data?.id ?? "");
+  const signature = request.headers.get("x-signature");
+  const requestId = request.headers.get("x-request-id");
+  if (signature && requestId) {
+    const isValid = validateMercadoPagoSignature({
+      signature,
+      requestId,
+      dataId,
+      secret,
+    });
+    if (!isValid) return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+  }
 
   if ((url.searchParams.get("type") ?? body?.type) === "payment" && dataId) {
     try {

@@ -15,10 +15,14 @@ export async function POST(request: Request) {
 
   const url = new URL(request.url);
   const body = (await request.json().catch(() => null)) as { type?: string; data?: { id?: string | number } } | null;
-  const dataId = url.searchParams.get("data.id") ?? url.searchParams.get("id") ?? String(body?.data?.id ?? "");
+  const eventType = url.searchParams.get("type") ?? url.searchParams.get("topic") ?? body?.type ?? "";
+  const dataId = url.searchParams.get("data.id") ?? url.searchParams.get("data_id") ?? url.searchParams.get("id") ?? String(body?.data?.id ?? "");
   const signature = request.headers.get("x-signature");
   const requestId = request.headers.get("x-request-id");
-  if (signature && requestId) {
+  if (signature || requestId) {
+    if (!signature || !requestId || !dataId) {
+      return NextResponse.json({ error: "Missing signature data" }, { status: 400 });
+    }
     const isValid = validateMercadoPagoSignature({
       signature,
       requestId,
@@ -28,7 +32,7 @@ export async function POST(request: Request) {
     if (!isValid) return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
-  if ((url.searchParams.get("type") ?? body?.type) === "payment" && dataId) {
+  if ((eventType === "payment" || eventType === "payment.created" || eventType === "payment.updated") && dataId) {
     try {
       const client = new MercadoPagoConfig({ accessToken, options: { timeout: 5000 } });
       const payment = await new Payment(client).get({ id: dataId });

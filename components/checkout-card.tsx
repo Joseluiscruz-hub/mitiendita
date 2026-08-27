@@ -72,7 +72,7 @@ export default function CheckoutCard() {
       <p className="label">PAQUETE PROFESIONAL</p>
       <h2>Automatización de reportes</h2>
       <p className="description">Configuración inicial, reporte automatizado y acompañamiento técnico.</p>
-      <div className="price"><small>MXN</small> $10.00</div>
+      <div className="price"><small>MXN</small> $599.00</div>
       {!preferenceId && (
         <button className="prepare" onClick={prepareCheckout} disabled={loading}>
           {loading ? "Preparando pago…" : "Continuar al pago"}

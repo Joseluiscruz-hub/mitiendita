@@ -29,7 +29,7 @@ export async function POST(request: Request) {
           category_id: "services",
           currency_id: "MXN",
           quantity,
-          unit_price: 599,
+          unit_price: 10,
         }],
         external_reference: orderId,
         integration_data: {

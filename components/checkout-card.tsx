@@ -68,19 +68,43 @@ export default function CheckoutCard() {
   return (
     <article className="checkout-card">
       <Script src="https://sdk.mercadopago.com/js/v2" strategy="afterInteractive" onLoad={() => setSdkReady(true)} />
-      <div className="product-icon">⚡</div>
-      <p className="label">PAQUETE PROFESIONAL</p>
-      <h2>Automatización de reportes</h2>
+      <div className="checkout-heading">
+        <span className="product-icon" aria-hidden="true">JL</span>
+        <div>
+          <p className="label">PAQUETE PROFESIONAL</p>
+          <h2>Automatización de reportes</h2>
+        </div>
+      </div>
+
       <p className="description">Configuración inicial, reporte automatizado y acompañamiento técnico.</p>
-      <div className="price"><small>MXN</small> $599.00</div>
+
+      <dl className="order-lines">
+        <div>
+          <dt>Servicio</dt>
+          <dd>Implementación digital</dd>
+        </div>
+        <div>
+          <dt>Entrega</dt>
+          <dd>Remota</dd>
+        </div>
+        <div>
+          <dt>Total</dt>
+          <dd><small>MXN</small> $599.00</dd>
+        </div>
+      </dl>
+
       {!preferenceId && (
         <button className="prepare" onClick={prepareCheckout} disabled={loading}>
-          {loading ? "Preparando pago…" : "Continuar al pago"}
+          {loading ? "Preparando pago..." : "Continuar al pago"}
         </button>
       )}
-      <div id="walletBrick_container" aria-live="polite" />
+
+      <div className={preferenceId ? "wallet-area is-ready" : "wallet-area"}>
+        <div id="walletBrick_container" aria-live="polite" />
+      </div>
+
       {error && <p className="error" role="alert">{error}</p>}
-      <p className="fineprint">Serás redirigido a Mercado Pago para completar la operación.</p>
+      <p className="fineprint">Seras redirigido a Mercado Pago para completar la operacion.</p>
     </article>
   );
 }

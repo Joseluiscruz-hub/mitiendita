@@ -1,8 +1,8 @@
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 const messages = {
-  approved: { icon: "✓", title: "Pago aprobado", detail: "Mercado Pago procesó la operación correctamente." },
-  pending: { icon: "…", title: "Pago pendiente", detail: "La operación está en revisión o espera confirmación." },
+  approved: { icon: "OK", title: "Pago aprobado", detail: "Mercado Pago procesó la operación correctamente." },
+  pending: { icon: "...", title: "Pago pendiente", detail: "La operación está en revisión o espera confirmación." },
   failure: { icon: "!", title: "Pago no completado", detail: "Puedes volver e intentarlo con otro medio de pago." },
 };
 

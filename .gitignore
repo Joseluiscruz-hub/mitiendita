@@ -1,6 +1,8 @@
 node_modules
 .next
 .idea/
+.ai/
+.claude/
 tsconfig.tsbuildinfo
 .env
 .env.local

@@ -29,9 +29,10 @@ export async function POST(request: Request) {
           category_id: "services",
           currency_id: "MXN",
           quantity,
-          unit_price: 599,
+          unit_price: 10,
         }],
         external_reference: orderId,
+        notification_url: `${appUrl}/api/webhooks/mercadopago`,
         integration_data: {
           integrator_id: process.env.MERCADOPAGO_INTEGRATOR_ID,
         },

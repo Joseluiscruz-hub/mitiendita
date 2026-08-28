@@ -89,7 +89,7 @@ export default function CheckoutCard() {
         </div>
         <div>
           <dt>Total</dt>
-          <dd><small>MXN</small> $599.00</dd>
+          <dd><small>MXN</small> $10.00</dd>
         </div>
       </dl>
 
